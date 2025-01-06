@@ -3,7 +3,6 @@ from professores import cadastrar_professor, consultar_professores_por_disciplin
 from disciplinas import cadastrar_disciplina, alocar_disciplina_em_turma, alocar_professor_em_disciplinas
 from turmas import cadastrar_turma, consultar_disciplinas_alocadas_em_turma
 
-
 professores = []
 alunos = []
 disciplinas = []
@@ -38,15 +37,14 @@ def main():
             matricular_aluno(turmas, alunos)
         elif opcao == "6":
             alunos_matriculados_em_turma(turmas)
-            alocar_professor_em_disciplinas(disciplinas, professores)
         elif opcao == "7":
-            consultar_disciplinas_alocadas_em_turma(turmas)
+            alocar_professor_em_disciplinas(disciplinas, professores)
         elif opcao == "8":
-            alocar_disciplina_em_turma(turmas, disciplinas)
+            alocar_disciplina_em_turma(turmas, disciplinas)  
         elif opcao == "9":
-            consultar_disciplinas_alocadas_em_turma(turmas)
+            consultar_disciplinas_alocadas_em_turma(turmas)  
         elif opcao == "10":
-            consultar_professores_por_disciplina(disciplinas, professores)
+            consultar_professores_por_disciplina(disciplinas, professores)  
         elif opcao == "11":
             print("Saindo do sistema...")
             break
@@ -55,3 +53,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
