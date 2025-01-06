@@ -31,3 +31,35 @@ def alocar_disciplina_em_turma(turmas, disciplinas):
         print(f"Disciplinas alocadas na turma {turma['nome']} com sucesso!")
     else:
         print("Turma não encontrada!")
+
+def alocar_professor_em_disciplinas(disciplinas, professores):
+    """
+    Aloca um professor a uma disciplina existente.
+    """
+    if not disciplinas:
+        print("Nenhuma disciplina cadastrada.")
+        return
+    if not professores:
+        print("Nenhum professor cadastrado.")
+        return
+
+    print("\nDisciplinas disponíveis:")
+    for i, d in enumerate(disciplinas):
+        print(f"{i + 1} - {d['nome']}")
+
+    escolha_disciplina = int(input("Escolha uma disciplina pelo número: ")) - 1
+    if escolha_disciplina < 0 or escolha_disciplina >= len(disciplinas):
+        print("Disciplina inválida.")
+        return
+
+    print("\nProfessores disponíveis:")
+    for i, p in enumerate(professores):
+        print(f"{i + 1} - {p['nome']}")
+
+    escolha_professor = int(input("Escolha um professor pelo número: ")) - 1
+    if escolha_professor < 0 or escolha_professor >= len(professores):
+        print("Professor inválido.")
+        return
+
+    disciplinas[escolha_disciplina]['professor'] = professores[escolha_professor]
+    print(f"Professor {professores[escolha_professor]['nome']} alocado na disciplina {disciplinas[escolha_disciplina]['nome']}.")
