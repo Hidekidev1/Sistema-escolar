@@ -1,5 +1,3 @@
-# disciplinas.py
-
 def cadastrar_disciplina(disciplinas, professores):
     """Cadastra uma nova disciplina no sistema."""
     nome = input("Nome da disciplina: ")
@@ -13,8 +11,17 @@ def cadastrar_disciplina(disciplinas, professores):
     print("Professores disponíveis:")
     for i, professor in enumerate(professores):
         print(f"{i + 1} - {professor['nome']}")
-    professor_escolhido = int(input("Escolha um professor para a disciplina (número): ")) - 1
-
+    
+    while True:
+        try:
+            professor_escolhido = int(input("Escolha um professor para a disciplina (número): ")) - 1
+            if 0 <= professor_escolhido < len(professores):
+                break
+            else:
+                print("Opção inválida. Tente novamente.")
+        except ValueError:
+            print("Entrada inválida. Por favor, escolha um número válido.")
+    
     disciplina = {
         "nome": nome,
         "codigo": codigo,

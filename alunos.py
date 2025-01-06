@@ -1,5 +1,3 @@
-# alunos.py
-
 import random
 
 def gerar_matricula(alunos):

@@ -1,9 +1,7 @@
-# main.py
-
 from alunos import cadastrar_aluno, listar_alunos
 from professores import cadastrar_professor, listar_professores
 from turmas import cadastrar_turma, listar_turmas, matricular_aluno, alunos_matriculados_em_turma
-from disciplinas import cadastrar_disciplina, listar_disciplinas, alocar_disciplina_em_turma, consultar_disciplinas_alocadas_em_turma
+from disciplinas import cadastrar_disciplina, listar_disciplinas, alocar_disciplina_em_turma, consultar_disciplinas_alocadas_em_turma, consultar_professores_por_disciplina
 from persistencia import carregar_dados, salvar_dados
 
 # Carregar dados dos arquivos JSON
@@ -29,14 +27,14 @@ def main():
 
         print("\n=== Matrícula e Alocação ===")
         print("9 - Matrícula de Aluno em Turma")
-        print("10 - Consultar Alunos Matriculados em Turma")
         print("11 - Alocar Disciplina em Turma")
         print("12 - Consultar Disciplinas Alocadas em Turma")
 
         print("\n=== Consultas ===")
         print("13 - Consultar Professores por Disciplina")
+        print("14 - Consultar Alunos Matriculados em Turma")
 
-        print("\n14 - Sair")
+        print("\n15 - Sair")
 
         opcao = input("Escolha uma opção: ")
 
@@ -66,7 +64,7 @@ def main():
             matricular_aluno(turmas, alunos)
             salvar_dados("turmas.json", turmas)
             salvar_dados("alunos.json", alunos)
-        elif opcao == "10":
+        elif opcao == "14":
             alunos_matriculados_em_turma(turmas)
 
         elif opcao == "11":
@@ -78,7 +76,7 @@ def main():
         elif opcao == "13":
             consultar_professores_por_disciplina(disciplinas, professores)
 
-        elif opcao == "14":
+        elif opcao == "15":
             print("Saindo do sistema...")
             break
         else:

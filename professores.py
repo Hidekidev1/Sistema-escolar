@@ -1,5 +1,3 @@
-# professores.py
-
 def cadastrar_professor(professores):
     """Cadastra um novo professor no sistema."""
     nome = input("Nome do professor: ")
