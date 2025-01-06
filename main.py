@@ -1,16 +1,16 @@
 from alunos import cadastrar_aluno, listar_alunos
 from professores import cadastrar_professor, listar_professores
-from turmas import cadastrar_turma, listar_turmas, matricular_aluno, alunos_matriculados_em_turma
-from disciplinas import cadastrar_disciplina, listar_disciplinas, alocar_disciplina_em_turma, consultar_disciplinas_alocadas_em_turma, consultar_professores_por_disciplina
+from turmas import cadastrar_turma, listar_turmas, matricular_aluno
+from disciplinas import cadastrar_disciplina, listar_disciplinas
 from persistencia import carregar_dados, salvar_dados
 
-# Carregar dados dos arquivos JSON
-professores = carregar_dados("professores.json")
-alunos = carregar_dados("alunos.json")
-disciplinas = carregar_dados("disciplinas.json")
-turmas = carregar_dados("turmas.json")
-
 def main():
+    # Carregar dados dos arquivos JSON
+    professores = carregar_dados("professores.json")
+    alunos = carregar_dados("alunos.json")
+    disciplinas = carregar_dados("disciplinas.json")
+    turmas = carregar_dados("turmas.json")
+
     while True:
         print("\nSistema de Gestão Escolar")
         print("=== Cadastro ===")
@@ -64,8 +64,6 @@ def main():
             matricular_aluno(turmas, alunos)
             salvar_dados("turmas.json", turmas)
             salvar_dados("alunos.json", alunos)
-        elif opcao == "14":
-            alunos_matriculados_em_turma(turmas)
 
         elif opcao == "11":
             alocar_disciplina_em_turma(turmas, disciplinas)
@@ -75,6 +73,9 @@ def main():
 
         elif opcao == "13":
             consultar_professores_por_disciplina(disciplinas, professores)
+
+        elif opcao == "14":
+            alunos_matriculados_em_turma(turmas)
 
         elif opcao == "15":
             print("Saindo do sistema...")
