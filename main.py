@@ -1,12 +1,14 @@
 from alunos import cadastrar_aluno, matricular_aluno, alunos_matriculados_em_turma
 from professores import cadastrar_professor, consultar_professores_por_disciplina
-from disciplinas import cadastrar_disciplina, alocar_disciplina_em_turma, alocar_professor_em_disciplinas
+from disciplinas import cadastrar_disciplina, alocar_disciplina_em_turma
 from turmas import cadastrar_turma, consultar_disciplinas_alocadas_em_turma
+from persistencia import carregar_dados, salvar_dados
 
-professores = []
-alunos = []
-disciplinas = []
-turmas = []
+# Carregar dados dos arquivos JSON
+professores = carregar_dados("professores.json")
+alunos = carregar_dados("alunos.json")
+disciplinas = carregar_dados("disciplinas.json")
+turmas = carregar_dados("turmas.json")
 
 def main():
     while True:
@@ -17,35 +19,39 @@ def main():
         print("4 - Cadastrar Turma")
         print("5 - Matrícula de Aluno em Turma")
         print("6 - Consultar Alunos Matriculados em Turma")
-        print("7 - Alocar Professor em Disciplinas")
-        print("8 - Alocar Disciplina em Turma")
-        print("9 - Consultar Disciplinas Alocadas em Turma")
-        print("10 - Consultar Professores por Disciplina")
-        print("11 - Sair")
+        print("7 - Alocar Disciplina em Turma")
+        print("8 - Consultar Disciplinas Alocadas em Turma")
+        print("9 - Consultar Professores por Disciplina")
+        print("10 - Sair")
 
         opcao = input("Escolha uma opção: ")
 
         if opcao == "1":
             cadastrar_professor(professores)
+            salvar_dados("professores.json", professores)
         elif opcao == "2":
             cadastrar_aluno(alunos, disciplinas)
+            salvar_dados("alunos.json", alunos)
         elif opcao == "3":
             cadastrar_disciplina(disciplinas, professores)
+            salvar_dados("disciplinas.json", disciplinas)
         elif opcao == "4":
             cadastrar_turma(turmas, disciplinas, professores)
+            salvar_dados("turmas.json", turmas)
         elif opcao == "5":
             matricular_aluno(turmas, alunos)
+            salvar_dados("turmas.json", turmas)
+            salvar_dados("alunos.json", alunos)
         elif opcao == "6":
             alunos_matriculados_em_turma(turmas)
         elif opcao == "7":
-            alocar_professor_em_disciplinas(disciplinas, professores)
+            alocar_disciplina_em_turma(turmas, disciplinas)
+            salvar_dados("turmas.json", turmas)
         elif opcao == "8":
-            alocar_disciplina_em_turma(turmas, disciplinas)  
+            consultar_disciplinas_alocadas_em_turma(turmas)
         elif opcao == "9":
-            consultar_disciplinas_alocadas_em_turma(turmas)  
+            consultar_professores_por_disciplina(disciplinas, professores)
         elif opcao == "10":
-            consultar_professores_por_disciplina(disciplinas, professores)  
-        elif opcao == "11":
             print("Saindo do sistema...")
             break
         else:
@@ -53,4 +59,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
