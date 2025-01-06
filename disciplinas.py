@@ -1,5 +1,5 @@
 def cadastrar_disciplina(disciplinas, professores):
-    """Cadastra uma nova disciplina no sistema."""
+    
     nome = input("Nome da disciplina: ")
     codigo = input("Código da disciplina: ")
     carga_horaria = int(input("Carga horária (em horas): "))
@@ -32,7 +32,7 @@ def cadastrar_disciplina(disciplinas, professores):
     print(f"Disciplina {nome} cadastrada com sucesso!")
 
 def listar_disciplinas(disciplinas):
-    """Lista todas as disciplinas cadastradas."""
+    
     if not disciplinas:
         print("Nenhuma disciplina cadastrada.")
         return

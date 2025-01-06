@@ -1,7 +1,15 @@
-def cadastrar_turma(turmas, disciplinas, professores):
-    """Cadastra uma nova turma no sistema."""
+def gerar_codigo_turma(turmas):
+    
+    numero = len(turmas) + 1  
+    codigo = f"TUR{numero:03}"  
+    return codigo
+
+def cadastrar_turma(turmas, professores):
+    
     nome = input("Nome da turma: ")
-    codigo = input("Código da turma: ")
+    
+
+    codigo = gerar_codigo_turma(turmas)
 
     print("Escolha um professor para a turma:")
     for i, professor in enumerate(professores):
@@ -16,10 +24,10 @@ def cadastrar_turma(turmas, disciplinas, professores):
         "alunos": []
     }
     turmas.append(turma)
-    print(f"Turma {nome} cadastrada com sucesso!")
+    print(f"Turma {nome} cadastrada com sucesso! Código: {codigo}")
 
 def listar_turmas(turmas):
-    """Lista todas as turmas cadastradas."""
+    
     if not turmas:
         print("Nenhuma turma cadastrada.")
         return
@@ -29,7 +37,7 @@ def listar_turmas(turmas):
         print(f"Nome: {turma['nome']}, Código: {turma['codigo']}")
 
 def matricular_aluno(turmas, alunos):
-    """Matrícula um aluno em uma turma."""  
+    
     # Exibir lista de alunos
     print("Alunos disponíveis para matrícula:")
     for i, aluno in enumerate(alunos):
@@ -43,7 +51,5 @@ def matricular_aluno(turmas, alunos):
         print(f"{i + 1} - {turma['nome']}")
     
     turma_escolhida = int(input("Escolha a turma para matrícula (número): ")) - 1
-    
-    # Matrícula o aluno na turma escolhida
     turmas[turma_escolhida]['alunos'].append(alunos[aluno_escolhido])
-    print(f"Aluno {alunos[aluno_escolhido]['nome']} matriculado na turma {turmas[turma_escolhida]['nome']} com sucesso!")
+    print(f"Aluno {alunos[aluno_escolhido]['nome']} matriculado na turma {turmas[turma_escolhida]['nome']}.")

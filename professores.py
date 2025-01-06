@@ -1,5 +1,5 @@
 def cadastrar_professor(professores):
-    """Cadastra um novo professor no sistema."""
+    
     nome = input("Nome do professor: ")
     matricula = input("Matrícula do professor: ")
     data_nascimento = input("Data de nascimento (YYYY-MM-DD): ")
@@ -21,7 +21,7 @@ def cadastrar_professor(professores):
     print(f"Professor {nome} cadastrado com sucesso!")
 
 def listar_professores(professores):
-    """Lista todos os professores cadastrados."""
+    
     if not professores:
         print("Nenhum professor cadastrado.")
         return
