@@ -1,20 +1,17 @@
 def cadastrar_disciplina(disciplinas, professores):
+    """Cadastra uma nova disciplina no sistema."""
     nome = input("Nome da disciplina: ")
     codigo = input("Código da disciplina: ")
-    carga_horaria = int(input("Carga horária: "))
+    carga_horaria = int(input("Carga horária (em horas): "))
 
     if not professores:
         print("Nenhum professor cadastrado. Cadastre um professor antes de continuar.")
         return
 
-    print("Escolha o professor para a disciplina:")
-    for i, p in enumerate(professores):
-        print(f"{i + 1} - {p['nome']}")
-    professor_escolhido = int(input("Digite o número do professor: ")) - 1
-
-    if not (0 <= professor_escolhido < len(professores)):
-        print("Professor inválido. Operação cancelada.")
-        return
+    print("Professores disponíveis:")
+    for i, professor in enumerate(professores):
+        print(f"{i + 1} - {professor['nome']}")
+    professor_escolhido = int(input("Escolha um professor para a disciplina (número): ")) - 1
 
     disciplina = {
         "nome": nome,
@@ -26,67 +23,29 @@ def cadastrar_disciplina(disciplinas, professores):
     print(f"Disciplina {nome} cadastrada com sucesso!")
 
 def alocar_disciplina_em_turma(turmas, disciplinas):
+    """Aloca uma disciplina em uma turma."""
     if not turmas:
         print("Nenhuma turma cadastrada.")
         return
+    
     if not disciplinas:
         print("Nenhuma disciplina cadastrada.")
         return
+    
+    print("Turmas disponíveis:")
+    for i, turma in enumerate(turmas):
+        print(f"{i + 1} - {turma['nome']} (Código: {turma['codigo']})")
+    turma_escolhida = int(input("Escolha uma turma (número): ")) - 1
 
-    codigo_turma = input("Digite o código da turma para alocar disciplinas: ")
+    print("Disciplinas disponíveis:")
+    for i, disciplina in enumerate(disciplinas):
+        print(f"{i + 1} - {disciplina['nome']} (Código: {disciplina['codigo']})")
+    disciplina_escolhida = int(input("Escolha uma disciplina (número): ")) - 1
 
-    turma = next((t for t in turmas if t['codigo'] == codigo_turma), None)
-    if turma:
-        print("Escolha as disciplinas para a turma:")
-        for i, d in enumerate(disciplinas):
-            print(f"{i + 1} - {d['nome']}")
-        try:
-            disciplinas_escolhidas = list(map(int, input("Digite os números das disciplinas (separados por espaço): ").split()))
-        except ValueError:
-            print("Entrada inválida. Por favor, insira números separados por espaço.")
-            return
+    turma = turmas[turma_escolhida]
+    disciplina = disciplinas[disciplina_escolhida]
 
-        turma['disciplinas'] = [disciplinas[i - 1] for i in disciplinas_escolhidas if 0 <= i - 1 < len(disciplinas)]
-        print(f"Disciplinas alocadas na turma {turma['nome']} com sucesso!")
-    else:
-        print("Turma não encontrada!")
+    turma["disciplinas"].append(disciplina)
+    print(f"Disciplina {disciplina['nome']} alocada na turma {turma['nome']} com sucesso!")
 
-def alocar_professor_em_disciplinas(disciplinas, professores):
-    if not disciplinas:
-        print("Nenhuma disciplina cadastrada.")
-        return
-    if not professores:
-        print("Nenhum professor cadastrado.")
-        return
-
-    print("\nDisciplinas disponíveis:")
-    for i, d in enumerate(disciplinas):
-        print(f"{i + 1} - {d['nome']}")
-
-    try:
-        escolha_disciplina = int(input("Escolha uma disciplina pelo número: ")) - 1
-    except ValueError:
-        print("Entrada inválida. Por favor, insira um número.")
-        return
-
-    if not (0 <= escolha_disciplina < len(disciplinas)):
-        print("Disciplina inválida. Operação cancelada.")
-        return
-
-    print("\nProfessores disponíveis:")
-    for i, p in enumerate(professores):
-        print(f"{i + 1} - {p['nome']}")
-
-    try:
-        escolha_professor = int(input("Escolha um professor pelo número: ")) - 1
-    except ValueError:
-        print("Entrada inválida. Por favor, insira um número.")
-        return
-
-    if not (0 <= escolha_professor < len(professores)):
-        print("Professor inválido. Operação cancelada.")
-        return
-
-    disciplinas[escolha_disciplina]['professor'] = professores[escolha_professor]
-    print(f"Professor {professores[escolha_professor]['nome']} alocado na disciplina {disciplinas[escolha_disciplina]['nome']}.")
 

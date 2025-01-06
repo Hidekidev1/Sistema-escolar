@@ -1,16 +1,22 @@
+import random
+
+def gerar_matricula(alunos):
+    """Gera um número de matrícula único e aleatório com 6 dígitos."""
+    while True:
+        matricula = str(random.randint(100000, 999999))
+        if all(aluno['matricula'] != matricula for aluno in alunos):
+            return matricula
+
 def cadastrar_aluno(alunos, disciplinas):
+    """Cadastra um novo aluno no sistema."""
     nome = input("Nome do aluno: ")
-    matricula = input("Matrícula do aluno: ")
     data_nascimento = input("Data de nascimento (YYYY-MM-DD): ")
-    sexo = input("Sexo (M/F): ")
+    sexo = input("Sexo (M/F): ").upper()
     endereco = input("Endereço: ")
     telefone = input("Telefone: ")
     email = input("Email: ")
-
-    print("Escolha a disciplina do aluno:")
-    for i, d in enumerate(disciplinas):
-        print(f"{i + 1} - {d['nome']}")
-    disciplina_escolhida = int(input("Digite o número da disciplina: ")) - 1
+    
+    matricula = gerar_matricula(alunos)
 
     aluno = {
         "nome": nome,
@@ -20,35 +26,55 @@ def cadastrar_aluno(alunos, disciplinas):
         "endereco": endereco,
         "telefone": telefone,
         "email": email,
-        "disciplina": disciplinas[disciplina_escolhida]['nome']
+        "disciplinas": []
     }
     alunos.append(aluno)
-    print(f"Aluno {nome} cadastrado com sucesso!")
+    print(f"Aluno {nome} cadastrado com sucesso! Matrícula: {matricula}")
 
 def matricular_aluno(turmas, alunos):
-    matricula_aluno = input("Digite a matrícula do aluno para matricular: ")
-    codigo_turma = input("Digite o código da turma para matrícula: ")
+    """Matricula um aluno em uma turma."""
+    if not alunos:
+        print("Nenhum aluno cadastrado.")
+        return
+    
+    if not turmas:
+        print("Nenhuma turma cadastrada.")
+        return
+    
+    print("Alunos disponíveis:")
+    for i, aluno in enumerate(alunos):
+        print(f"{i + 1} - {aluno['nome']} (Matrícula: {aluno['matricula']})")
+    aluno_escolhido = int(input("Escolha um aluno (número): ")) - 1
 
-    aluno = next((a for a in alunos if a['matricula'] == matricula_aluno), None)
-    turma = next((t for t in turmas if t['codigo'] == codigo_turma), None)
+    print("Turmas disponíveis:")
+    for i, turma in enumerate(turmas):
+        print(f"{i + 1} - {turma['nome']} (Código: {turma['codigo']})")
+    turma_escolhida = int(input("Escolha uma turma (número): ")) - 1
 
-    if aluno and turma:
-        turma['alunos'].append(aluno)
-        print(f"Aluno {aluno['nome']} matriculado na turma {turma['nome']} com sucesso!")
-    else:
-        print("Aluno ou turma não encontrado!")
+    aluno = alunos[aluno_escolhido]
+    turma = turmas[turma_escolhida]
+
+    turma["alunos"].append(aluno)
+    aluno["disciplinas"].extend(turma["disciplinas"])
+    print(f"Aluno {aluno['nome']} matriculado na turma {turma['nome']} com sucesso!")
 
 def alunos_matriculados_em_turma(turmas):
-    codigo_turma = input("Digite o código da turma para consultar os alunos: ")
+    """Exibe os alunos matriculados em uma turma."""
+    if not turmas:
+        print("Nenhuma turma cadastrada.")
+        return
+    
+    print("Turmas disponíveis:")
+    for i, turma in enumerate(turmas):
+        print(f"{i + 1} - {turma['nome']} (Código: {turma['codigo']})")
+    turma_escolhida = int(input("Escolha uma turma (número): ")) - 1
 
-    turma = next((t for t in turmas if t['codigo'] == codigo_turma), None)
-
-    if turma:
-        if turma['alunos']:
-            print(f"Alunos matriculados na turma {turma['nome']}:")
-            for aluno in turma['alunos']:
-                print(aluno['nome'])
-        else:
-            print(f"Nenhum aluno matriculado na turma {turma['nome']}.")
+    turma = turmas[turma_escolhida]
+    if turma["alunos"]:
+        print(f"Alunos matriculados na turma {turma['nome']}:")
+        for aluno in turma["alunos"]:
+            print(f"- {aluno['nome']} (Matrícula: {aluno['matricula']})")
     else:
-        print("Turma não encontrada!")
+        print(f"Não há alunos matriculados na turma {turma['nome']}.")
+
+

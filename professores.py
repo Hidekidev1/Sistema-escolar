@@ -1,4 +1,5 @@
 def cadastrar_professor(professores):
+    """Cadastra um novo professor no sistema."""
     nome = input("Nome do professor: ")
     matricula = input("Matrícula do professor: ")
     data_nascimento = input("Data de nascimento (YYYY-MM-DD): ")
@@ -20,11 +21,18 @@ def cadastrar_professor(professores):
     print(f"Professor {nome} cadastrado com sucesso!")
 
 def consultar_professores_por_disciplina(disciplinas, professores):
-    nome_disciplina = input("Digite o nome da disciplina para filtrar os professores: ")
+    """Consulta professores que lecionam uma disciplina específica."""
+    if not disciplinas:
+        print("Nenhuma disciplina cadastrada.")
+        return
 
-    disciplina = next((d for d in disciplinas if d['nome'] == nome_disciplina), None)
-    if disciplina:
-        print(f"Professores alocados na disciplina {nome_disciplina}:")
-        print(f"Professor: {disciplina['professor']['nome']}")
-    else:
-        print("Disciplina não encontrada!")
+    print("Disciplinas disponíveis:")
+    for i, disciplina in enumerate(disciplinas):
+        print(f"{i + 1} - {disciplina['nome']} (Código: {disciplina['codigo']})")
+    disciplina_escolhida = int(input("Escolha uma disciplina (número): ")) - 1
+
+    disciplina = disciplinas[disciplina_escolhida]
+    professor = disciplina["professor"]
+
+    print(f"O professor responsável pela disciplina {disciplina['nome']} é {professor['nome']}.")
+
