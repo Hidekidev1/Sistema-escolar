@@ -6,12 +6,12 @@ def cadastrar_aluno(alunos, disciplinas):
     endereco = input("Endereço: ")
     telefone = input("Telefone: ")
     email = input("Email: ")
-    
+
     print("Escolha a disciplina do aluno:")
     for i, d in enumerate(disciplinas):
         print(f"{i + 1} - {d['nome']}")
     disciplina_escolhida = int(input("Digite o número da disciplina: ")) - 1
-    
+
     aluno = {
         "nome": nome,
         "matricula": matricula,
@@ -28,13 +28,27 @@ def cadastrar_aluno(alunos, disciplinas):
 def matricular_aluno(turmas, alunos):
     matricula_aluno = input("Digite a matrícula do aluno para matricular: ")
     codigo_turma = input("Digite o código da turma para matrícula: ")
-    
+
     aluno = next((a for a in alunos if a['matricula'] == matricula_aluno), None)
     turma = next((t for t in turmas if t['codigo'] == codigo_turma), None)
-    
+
     if aluno and turma:
         turma['alunos'].append(aluno)
         print(f"Aluno {aluno['nome']} matriculado na turma {turma['nome']} com sucesso!")
     else:
         print("Aluno ou turma não encontrado!")
 
+def alunos_matriculados_em_turma(turmas):
+    codigo_turma = input("Digite o código da turma para consultar os alunos: ")
+
+    turma = next((t for t in turmas if t['codigo'] == codigo_turma), None)
+
+    if turma:
+        if turma['alunos']:
+            print(f"Alunos matriculados na turma {turma['nome']}:")
+            for aluno in turma['alunos']:
+                print(aluno['nome'])
+        else:
+            print(f"Nenhum aluno matriculado na turma {turma['nome']}.")
+    else:
+        print("Turma não encontrada!")
