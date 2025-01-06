@@ -1,3 +1,5 @@
+# turmas.py
+
 def cadastrar_turma(turmas, disciplinas, professores):
     """Cadastra uma nova turma no sistema."""
     nome = input("Nome da turma: ")
@@ -18,22 +20,12 @@ def cadastrar_turma(turmas, disciplinas, professores):
     turmas.append(turma)
     print(f"Turma {nome} cadastrada com sucesso!")
 
-def consultar_disciplinas_alocadas_em_turma(turmas):
-    """Consulta as disciplinas alocadas em uma turma."""
+def listar_turmas(turmas):
+    """Lista todas as turmas cadastradas."""
     if not turmas:
         print("Nenhuma turma cadastrada.")
         return
-
-    print("Turmas disponíveis:")
-    for i, turma in enumerate(turmas):
-        print(f"{i + 1} - {turma['nome']} (Código: {turma['codigo']})")
-    turma_escolhida = int(input("Escolha uma turma (número): ")) - 1
-
-    turma = turmas[turma_escolhida]
-    if turma["disciplinas"]:
-        print(f"Disciplinas alocadas na turma {turma['nome']}:")
-        for disciplina in turma["disciplinas"]:
-            print(f"- {disciplina['nome']} (Código: {disciplina['codigo']})")
-    else:
-        print(f"Não há disciplinas alocadas na turma {turma['nome']}.")
-
+    
+    print("Turmas cadastradas:")
+    for turma in turmas:
+        print(f"Nome: {turma['nome']}, Código: {turma['codigo']}")

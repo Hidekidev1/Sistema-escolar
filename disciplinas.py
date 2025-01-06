@@ -1,3 +1,5 @@
+# disciplinas.py
+
 def cadastrar_disciplina(disciplinas, professores):
     """Cadastra uma nova disciplina no sistema."""
     nome = input("Nome da disciplina: ")
@@ -22,30 +24,12 @@ def cadastrar_disciplina(disciplinas, professores):
     disciplinas.append(disciplina)
     print(f"Disciplina {nome} cadastrada com sucesso!")
 
-def alocar_disciplina_em_turma(turmas, disciplinas):
-    """Aloca uma disciplina em uma turma."""
-    if not turmas:
-        print("Nenhuma turma cadastrada.")
-        return
-    
+def listar_disciplinas(disciplinas):
+    """Lista todas as disciplinas cadastradas."""
     if not disciplinas:
         print("Nenhuma disciplina cadastrada.")
         return
     
-    print("Turmas disponíveis:")
-    for i, turma in enumerate(turmas):
-        print(f"{i + 1} - {turma['nome']} (Código: {turma['codigo']})")
-    turma_escolhida = int(input("Escolha uma turma (número): ")) - 1
-
-    print("Disciplinas disponíveis:")
-    for i, disciplina in enumerate(disciplinas):
-        print(f"{i + 1} - {disciplina['nome']} (Código: {disciplina['codigo']})")
-    disciplina_escolhida = int(input("Escolha uma disciplina (número): ")) - 1
-
-    turma = turmas[turma_escolhida]
-    disciplina = disciplinas[disciplina_escolhida]
-
-    turma["disciplinas"].append(disciplina)
-    print(f"Disciplina {disciplina['nome']} alocada na turma {turma['nome']} com sucesso!")
-
-
+    print("Disciplinas cadastradas:")
+    for disciplina in disciplinas:
+        print(f"Nome: {disciplina['nome']}, Código: {disciplina['codigo']}")

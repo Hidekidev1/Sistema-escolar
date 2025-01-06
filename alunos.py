@@ -1,3 +1,5 @@
+# alunos.py
+
 import random
 
 def gerar_matricula(alunos):
@@ -31,50 +33,12 @@ def cadastrar_aluno(alunos, disciplinas):
     alunos.append(aluno)
     print(f"Aluno {nome} cadastrado com sucesso! Matrícula: {matricula}")
 
-def matricular_aluno(turmas, alunos):
-    """Matricula um aluno em uma turma."""
+def listar_alunos(alunos):
+    """Lista todos os alunos cadastrados."""
     if not alunos:
         print("Nenhum aluno cadastrado.")
         return
     
-    if not turmas:
-        print("Nenhuma turma cadastrada.")
-        return
-    
-    print("Alunos disponíveis:")
-    for i, aluno in enumerate(alunos):
-        print(f"{i + 1} - {aluno['nome']} (Matrícula: {aluno['matricula']})")
-    aluno_escolhido = int(input("Escolha um aluno (número): ")) - 1
-
-    print("Turmas disponíveis:")
-    for i, turma in enumerate(turmas):
-        print(f"{i + 1} - {turma['nome']} (Código: {turma['codigo']})")
-    turma_escolhida = int(input("Escolha uma turma (número): ")) - 1
-
-    aluno = alunos[aluno_escolhido]
-    turma = turmas[turma_escolhida]
-
-    turma["alunos"].append(aluno)
-    aluno["disciplinas"].extend(turma["disciplinas"])
-    print(f"Aluno {aluno['nome']} matriculado na turma {turma['nome']} com sucesso!")
-
-def alunos_matriculados_em_turma(turmas):
-    """Exibe os alunos matriculados em uma turma."""
-    if not turmas:
-        print("Nenhuma turma cadastrada.")
-        return
-    
-    print("Turmas disponíveis:")
-    for i, turma in enumerate(turmas):
-        print(f"{i + 1} - {turma['nome']} (Código: {turma['codigo']})")
-    turma_escolhida = int(input("Escolha uma turma (número): ")) - 1
-
-    turma = turmas[turma_escolhida]
-    if turma["alunos"]:
-        print(f"Alunos matriculados na turma {turma['nome']}:")
-        for aluno in turma["alunos"]:
-            print(f"- {aluno['nome']} (Matrícula: {aluno['matricula']})")
-    else:
-        print(f"Não há alunos matriculados na turma {turma['nome']}.")
-
-
+    print("Alunos cadastrados:")
+    for aluno in alunos:
+        print(f"Nome: {aluno['nome']}, Matrícula: {aluno['matricula']}")

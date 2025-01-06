@@ -1,3 +1,5 @@
+# persistencia.py
+
 import json
 
 def carregar_dados(nome_arquivo):
