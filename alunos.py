@@ -7,8 +7,8 @@ def gerar_matricula(alunos):
         if all(aluno['matricula'] != matricula for aluno in alunos):
             return matricula
 
-def cadastrar_aluno(alunos):
-    """Cadastra um novo aluno no sistema."""
+def cadastrar_aluno(alunos, disciplinas):
+    
     nome = input("Nome do aluno: ")
     data_nascimento = input("Data de nascimento (YYYY-MM-DD): ")
     sexo = input("Sexo (M/F): ").upper()

@@ -1,14 +1,15 @@
 import json
 
-def carregar_dados(nome_arquivo):
-    """Carrega dados de um arquivo JSON."""
+def carregar_dados(arquivo):
+    """Carrega os dados de um arquivo JSON e retorna o conteúdo."""
     try:
-        with open(nome_arquivo, 'r', encoding='utf-8') as arquivo:
-            return json.load(arquivo)
+        with open(arquivo, "r") as file:
+            return json.load(file)
     except FileNotFoundError:
-        return []  
+        print(f"Arquivo {arquivo} não encontrado. Criando novo arquivo.")
+        return []  # Retorna uma lista vazia se o arquivo não for encontrado
     except json.JSONDecodeError:
-        print(f"Erro ao carregar os dados de {nome_arquivo}.")
+        print(f"Erro ao decodificar o arquivo {arquivo}.")
         return []
 
 def salvar_dados(nome_arquivo, dados):

@@ -8,7 +8,7 @@ def cadastrar_turma(turmas, professores):
     
     nome = input("Nome da turma: ")
     
-
+    
     codigo = gerar_codigo_turma(turmas)
 
     print("Escolha um professor para a turma:")
@@ -35,21 +35,3 @@ def listar_turmas(turmas):
     print("Turmas cadastradas:")
     for turma in turmas:
         print(f"Nome: {turma['nome']}, Código: {turma['codigo']}")
-
-def matricular_aluno(turmas, alunos):
-    
-    # Exibir lista de alunos
-    print("Alunos disponíveis para matrícula:")
-    for i, aluno in enumerate(alunos):
-        print(f"{i + 1} - {aluno['nome']}")
-    
-    aluno_escolhido = int(input("Escolha o aluno para matrícula (número): ")) - 1
-    
-    # Exibir lista de turmas
-    print("Turmas disponíveis para matrícula:")
-    for i, turma in enumerate(turmas):
-        print(f"{i + 1} - {turma['nome']}")
-    
-    turma_escolhida = int(input("Escolha a turma para matrícula (número): ")) - 1
-    turmas[turma_escolhida]['alunos'].append(alunos[aluno_escolhido])
-    print(f"Aluno {alunos[aluno_escolhido]['nome']} matriculado na turma {turmas[turma_escolhida]['nome']}.")

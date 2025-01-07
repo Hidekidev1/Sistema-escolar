@@ -1,1 +1,29 @@
-[]
+[
+    {
+        "nome": "Beto",
+        "matricula": "16",
+        "data_nascimento": "342342",
+        "sexo": "234",
+        "endereco": "243",
+        "telefone": "234",
+        "email": "234"
+    },
+    {
+        "nome": "beto",
+        "matricula": "& C:/Users/Administrator/AppData/Local/Programs/Python/Python313/python.exe c:/Users/Administrator/Desktop/Beto.atv/main.py",
+        "data_nascimento": "123423",
+        "sexo": "234",
+        "endereco": "234",
+        "telefone": "324",
+        "email": "324"
+    },
+    {
+        "nome": "beto",
+        "matricula": "& C:/Users/Administrator/AppData/Local/Programs/Python/Python313/python.exe c:/Users/Administrator/Desktop/Beto.atv/main.py",
+        "data_nascimento": "12",
+        "sexo": "12",
+        "endereco": "12",
+        "telefone": "12",
+        "email": "12"
+    }
+]

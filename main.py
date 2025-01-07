@@ -1,7 +1,7 @@
 from alunos import cadastrar_aluno, listar_alunos
 from professores import cadastrar_professor, listar_professores
-from turmas import cadastrar_turma, listar_turmas, matricular_aluno
-from disciplinas import cadastrar_disciplina, listar_disciplinas
+from turmas import cadastrar_turma, listar_turmas, matricular_aluno, alocar_disciplina_em_turma, consultar_disciplinas_alocadas_em_turma, alunos_matriculados_em_turma
+from disciplinas import cadastrar_disciplina, listar_disciplinas, consultar_professores_por_disciplina
 from persistencia import carregar_dados, salvar_dados
 
 def main():
@@ -27,14 +27,14 @@ def main():
 
         print("\n=== Matrícula e Alocação ===")
         print("9 - Matrícula de Aluno em Turma")
-        print("11 - Alocar Disciplina em Turma")
-        print("12 - Consultar Disciplinas Alocadas em Turma")
+        print("10 - Alocar Disciplina em Turma")
 
         print("\n=== Consultas ===")
-        print("13 - Consultar Professores por Disciplina")
-        print("14 - Consultar Alunos Matriculados em Turma")
+        print("11 - Consultar Professores por Disciplina")
+        print("12 - Consultar Alunos Matriculados em Turma")
+        print("13 - Consultar Disciplinas Alocadas em Turma")
 
-        print("\n15 - Sair")
+        print("\n14 - Sair")
 
         opcao = input("Escolha uma opção: ")
 
@@ -48,7 +48,7 @@ def main():
             cadastrar_disciplina(disciplinas, professores)
             salvar_dados("disciplinas.json", disciplinas)
         elif opcao == "4":
-            cadastrar_turma(turmas, disciplinas, professores)
+            cadastrar_turma(turmas, professores)
             salvar_dados("turmas.json", turmas)
 
         elif opcao == "5":
@@ -65,23 +65,18 @@ def main():
             salvar_dados("turmas.json", turmas)
             salvar_dados("alunos.json", alunos)
 
-        elif opcao == "11":
+        elif opcao == "10":
             alocar_disciplina_em_turma(turmas, disciplinas)
             salvar_dados("turmas.json", turmas)
-        elif opcao == "12":
+        elif opcao == "13":
             consultar_disciplinas_alocadas_em_turma(turmas)
 
-        elif opcao == "13":
+        elif opcao == "11":
             consultar_professores_por_disciplina(disciplinas, professores)
 
-        elif opcao == "14":
+        elif opcao == "12":
             alunos_matriculados_em_turma(turmas)
 
-        elif opcao == "15":
+        elif opcao == "14":
             print("Saindo do sistema...")
             break
-        else:
-            print("Opção inválida, tente novamente.")
-
-if __name__ == "__main__":
-    main()

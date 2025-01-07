@@ -1,7 +1,16 @@
+def gerar_codigo_disciplina(disciplinas):
+    
+    numero = len(disciplinas) + 1  
+    codigo = f"D{numero:03}"  
+    return codigo
+
 def cadastrar_disciplina(disciplinas, professores):
     
     nome = input("Nome da disciplina: ")
-    codigo = input("Código da disciplina: ")
+    
+    # Gerar código automático para a disciplina
+    codigo = gerar_codigo_disciplina(disciplinas)
+
     carga_horaria = int(input("Carga horária (em horas): "))
 
     if not professores:
@@ -28,15 +37,9 @@ def cadastrar_disciplina(disciplinas, professores):
         "carga_horaria": carga_horaria,
         "professor": professores[professor_escolhido]
     }
+    
+    # Adiciona a disciplina à lista de disciplinas do professor
+    professores[professor_escolhido]['disciplinas'].append(disciplina)
+
     disciplinas.append(disciplina)
     print(f"Disciplina {nome} cadastrada com sucesso!")
-
-def listar_disciplinas(disciplinas):
-    
-    if not disciplinas:
-        print("Nenhuma disciplina cadastrada.")
-        return
-    
-    print("Disciplinas cadastradas:")
-    for disciplina in disciplinas:
-        print(f"Nome: {disciplina['nome']}, Código: {disciplina['codigo']}")
