@@ -6,10 +6,10 @@ from persistencia import carregar_dados, salvar_dados
 
 def main():
     # Carregar dados dos arquivos JSON
-    professores = carregar_dados("professores.json")
-    alunos = carregar_dados("alunos.json")
-    disciplinas = carregar_dados("disciplinas.json")
-    turmas = carregar_dados("turmas.json")
+    professores = carregar_dados("professores.json") or []
+    alunos = carregar_dados("alunos.json") or []
+    disciplinas = carregar_dados("disciplinas.json") or []
+    turmas = carregar_dados("turmas.json") or []
 
     while True:
         print("\nSistema de Gestão Escolar")
@@ -68,8 +68,6 @@ def main():
         elif opcao == "10":
             alocar_disciplina_em_turma(turmas, disciplinas)
             salvar_dados("turmas.json", turmas)
-        elif opcao == "13":
-            consultar_disciplinas_alocadas_em_turma(turmas)
 
         elif opcao == "11":
             consultar_professores_por_disciplina(disciplinas, professores)
@@ -77,6 +75,15 @@ def main():
         elif opcao == "12":
             alunos_matriculados_em_turma(turmas)
 
+        elif opcao == "13":
+            consultar_disciplinas_alocadas_em_turma(turmas)
+
         elif opcao == "14":
             print("Saindo do sistema...")
             break
+
+        else:
+            print("Opção inválida. Tente novamente.")
+
+if __name__ == "__main__":
+    main()

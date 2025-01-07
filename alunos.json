@@ -1,1 +1,12 @@
-[]
+[
+    {
+        "nome": "lumye",
+        "matricula": "619857",
+        "data_nascimento": "15-07-2006",
+        "sexo": "F",
+        "endereco": "rua 2",
+        "telefone": "18567575",
+        "email": "luluzika@gmail",
+        "disciplinas": []
+    }
+]
